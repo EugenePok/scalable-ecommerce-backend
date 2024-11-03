@@ -1,5 +1,5 @@
 {
-  "name": "scalable-ecommerce-user-service",
+  "name": "scalable-ecommerce-cart-service",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -7,11 +7,11 @@
     "dev": "nodemon index.js"
   },
   "type": "module",
-  "author": "eugene",
+  "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "argon2": "^0.41.1",
+    "axios": "^1.7.7",
     "dotenv": "^16.4.5",
     "dynamoose": "^4.0.2",
     "express": "^4.21.1",

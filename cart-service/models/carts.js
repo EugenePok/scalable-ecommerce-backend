@@ -1,8 +1,15 @@
 import dynamoose from "dynamoose";
-import * as argon2 from "argon2";
 import "../config/dynamoose.js";
 
-const userSchema = new dynamoose.Schema({
+const cartItemSchema = new dynamoose.Schema({
+  productId: {
+    type: String,
+    required: true,
+  },
+  quantity: { type: Number, default: 1, required: true },
+});
+
+const cartSchema = new dynamoose.Schema({
   email: {
     type: String,
     required: true,
@@ -13,18 +20,13 @@ const userSchema = new dynamoose.Schema({
       return newValue.trim().toLowerCase();
     },
   },
-  name: { type: String, required: true },
-  password: {
-    type: String,
-    set: async (newValue, oldValue) => {
-      if (oldValue == newValue) return oldValue;
-      return await argon2.hash(newValue);
-    },
-    required: true,
+  items: {
+    type: Array,
+    schema: [cartItemSchema],
   },
 });
 
-export const User = dynamoose.model("User", userSchema, {
+export const Cart = dynamoose.model("Cart", cartSchema, {
   create: true,
   waitForActive: true,
 });
